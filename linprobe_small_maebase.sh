@@ -1,0 +1,11 @@
+OMP_NUM_THREADS=1 python -m torch.distributed.launch --nproc_per_node=8 main_linprobe.py \
+    --accum_iter 4 \
+    --batch_size 512 \
+    --model vit_small_patch16 --cls_token \
+    --finetune '/mnt/workspace/baseline/mae/mae_small_800_16/checkpoint-799.pth' \
+    --epochs 90 \
+    --blr 0.1 \
+    --weight_decay 0.0 \
+    --dist_eval --data_path '/earth-nas/datasets/imagenet-1k' \
+    --output_dir './linprobe_maebase_imagenet070_small_800' \
+    --log_dir './linprobe_maebase_imagenet070_small_800'
